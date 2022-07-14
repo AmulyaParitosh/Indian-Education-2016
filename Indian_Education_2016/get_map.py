@@ -62,8 +62,38 @@ def get_dists_map(df, state, var):
         },
     )
 
-
     fig = go.FigureWidget(data=[trace], layout=lyt)
     fig.update_layout(paper_bgcolor=colors["bg_highlight"],)
+
+    return fig
+
+
+def lit_fig_callback(state, var1, var2, var3, var4):
+    data = g_dist_df.get_group(state)
+
+    fig = px.scatter(
+        data,
+        x=str(var1),
+        y=str(var2),
+        size=str(var3),
+        color=str(var4),
+        hover_name="DISTNAME",
+        log_x=True,
+        size_max=90,
+        title="Literacy Rate and Population",
+        labels={
+            "female_literacy_rate": "Felame Literacy Rate",
+            "male_literacy_rate": "Male Literacy Rate",
+            "literacy_rate": "Literacy Rate",
+            "tot_population": "Total Population",
+        },
+    )
+
+    fig.update_layout(
+        plot_bgcolor=colors["background"],
+        paper_bgcolor=colors["background"],
+        font_color=colors["text"],
+        height=650,
+    )
 
     return fig

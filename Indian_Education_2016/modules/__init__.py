@@ -33,3 +33,4 @@ loc.set_index("statname", inplace=True)
 
 colors = {"background": "#111111", "text": "#7FDBFF", "bg_highlight": "#262626"}
 
+all_vars = dist_df.iloc[:, 3:].columns.to_list()

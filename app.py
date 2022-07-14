@@ -17,33 +17,90 @@ app.layout = html.Div(
             ],
         ),
         html.Div(
-            className="item",
             children=[
-                html.H2("Variable"),
-                var_name := dcc.Dropdown(
-                    list(variables.keys()),
-                    list(variables.keys())[0],
-                    clearable=False,
-                    className="dropitem",
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H2("Variable"),
+                        var_name := dcc.Dropdown(
+                            list(variables.keys()),
+                            list(variables.keys())[0],
+                            clearable=False,
+                            className="dropitem",
+                        ),
+                    ],
+                ),
+                html.Div(className="item5", children=[map := dcc.Graph()],),
+            ]
+        ),
+        html.Div(
+            children=[
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H2("State"),
+                        state_name := dcc.Dropdown(
+                            state_names, state_names[4], clearable=False,
+                        ),
+                    ],
+                ),
+                html.Div(className="item6", children=[details_graph := dcc.Graph()]),
+            ]
+        ),
+        html.Div(
+            children=[
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H2("District"),
+                        dist_name := dcc.Dropdown(clearable=False),
+                    ],
+                ),
+                html.Div(className="item7", children=[]),
+            ]
+        ),
+        html.Div(
+            className="item8",
+            children=[
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H4("x-axis"),
+                        detail_var_1 := dcc.Dropdown(
+                            all_vars, all_vars[0], clearable=False
+                        ),
+                    ],
+                ),
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H4("y-axis"),
+                        detail_var_2 := dcc.Dropdown(
+                            all_vars, all_vars[1], clearable=False
+                        ),
+                    ],
+                ),
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H4("Size"),
+                        detail_var_3 := dcc.Dropdown(
+                            all_vars, all_vars[2], clearable=False
+                        ),
+                    ],
+                ),
+                html.Div(
+                    className="item",
+                    children=[
+                        html.H4("Color"),
+                        detail_var_4 := dcc.Dropdown(
+                            all_vars, all_vars[3], clearable=False
+                        ),
+                    ],
                 ),
             ],
         ),
-        html.Div(
-            className="item",
-            children=[
-                html.H2("State"),
-                state_name := dcc.Dropdown(
-                    state_names, state_names[4], clearable=False,
-                ),
-            ],
-        ),
-        html.Div(
-            className="item",
-            children=[html.H2("District"), dist_name := dcc.Dropdown(clearable=False),],
-        ),
-        html.Div(className="item5", children=[map := dcc.Graph()],),
-        html.Div(className="item6", children=[details_graph := dcc.Graph()]),
-        html.Div(className="item7", children=[]),
+        html.Div(className="item9", children=[scat_graph := dcc.Graph()]),
     ],
 )
 
@@ -72,6 +129,18 @@ def display_map(var):
 )
 def display_map(state_name, var_name):
     return get_dists_map(g_dist_df, state_name, var_name)
+
+
+@app.callback(
+    Output(scat_graph, "figure"),
+    Input(state_name, "value"),
+    Input(detail_var_1, "value"),
+    Input(detail_var_2, "value"),
+    Input(detail_var_3, "value"),
+    Input(detail_var_4, "value"),
+)
+def display_map(state, var1, var2, var3, var4):
+    return lit_fig_callback(state, var1, var2, var3, var4)
 
 
 app.run_server(debug=True, port=8051)
