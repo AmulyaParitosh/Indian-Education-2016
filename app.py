@@ -38,6 +38,18 @@ app.layout = html.Div(
                 html.Div(
                     className="item",
                     children=[
+                        html.H2("Details"),
+                        dist_name := dcc.Dropdown(clearable=False),
+                    ],
+                ),
+                html.Div(className="item7", children=[]),
+            ]
+        ),
+        html.Div(
+            children=[
+                html.Div(
+                    className="item",
+                    children=[
                         html.H2("State"),
                         state_name := dcc.Dropdown(
                             state_names, state_names[4], clearable=False,
@@ -48,40 +60,28 @@ app.layout = html.Div(
             ]
         ),
         html.Div(
-            children=[
-                html.Div(
-                    className="item",
-                    children=[
-                        html.H2("District"),
-                        dist_name := dcc.Dropdown(clearable=False),
-                    ],
-                ),
-                html.Div(className="item7", children=[]),
-            ]
-        ),
-        html.Div(
             className="item8",
             children=[
                 html.Div(
-                    className="item",
+                    className="item details",
                     children=[
-                        html.H4("x-axis"),
+                        html.H4("X-axis"),
                         detail_var_1 := dcc.Dropdown(
                             all_vars, all_vars[0], clearable=False
                         ),
                     ],
                 ),
                 html.Div(
-                    className="item",
+                    className="item details",
                     children=[
-                        html.H4("y-axis"),
+                        html.H4("Y-axis"),
                         detail_var_2 := dcc.Dropdown(
                             all_vars, all_vars[1], clearable=False
                         ),
                     ],
                 ),
                 html.Div(
-                    className="item",
+                    className="item details",
                     children=[
                         html.H4("Size"),
                         detail_var_3 := dcc.Dropdown(
@@ -90,7 +90,7 @@ app.layout = html.Div(
                     ],
                 ),
                 html.Div(
-                    className="item",
+                    className="item details",
                     children=[
                         html.H4("Color"),
                         detail_var_4 := dcc.Dropdown(
@@ -143,4 +143,4 @@ def display_map(state, var1, var2, var3, var4):
     return lit_fig_callback(state, var1, var2, var3, var4)
 
 
-app.run_server(debug=True, port=8051)
+app.run_server(debug=True)

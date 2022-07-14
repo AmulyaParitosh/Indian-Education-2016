@@ -17,7 +17,7 @@ def get_states_map(df, var):
     )
 
     lyt = go.Layout(
-        height=700,
+        height=680,
         mapbox_style="white-bg",
         mapbox=dict(style="satellite",),
         mapbox_zoom=3.4,
@@ -53,7 +53,7 @@ def get_dists_map(df, state, var):
 
     lyt = go.Layout(
         geo=dict(bgcolor="rgba(0,0,0,0)", lakecolor="#4E5D6C"),
-        height=700,
+        height=680,
         mapbox_style="white-bg",
         mapbox_zoom=5.5,
         mapbox_center={
@@ -80,7 +80,6 @@ def lit_fig_callback(state, var1, var2, var3, var4):
         hover_name="DISTNAME",
         log_x=True,
         size_max=90,
-        title="Literacy Rate and Population",
         labels={
             "female_literacy_rate": "Felame Literacy Rate",
             "male_literacy_rate": "Male Literacy Rate",
@@ -90,10 +89,10 @@ def lit_fig_callback(state, var1, var2, var3, var4):
     )
 
     fig.update_layout(
-        plot_bgcolor=colors["background"],
-        paper_bgcolor=colors["background"],
+        plot_bgcolor=colors["bg_highlight"],
+        paper_bgcolor=colors["bg_highlight"],
         font_color=colors["text"],
-        height=650,
+        height=665,
     )
 
     return fig
