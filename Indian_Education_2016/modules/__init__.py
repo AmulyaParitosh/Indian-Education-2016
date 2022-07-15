@@ -5,9 +5,9 @@ import json
 import plotly.express as px
 
 
-state_df = pd.read_csv("data/2015_16_Statewise_Secondary.csv")
+state_df = pd.read_csv("/home/encryptedbee/tesla/projects/Indian-Education-2016/data/2015_16_Statewise_Secondary.csv")
 
-dist_df = pd.read_csv("data/data.csv")
+dist_df = pd.read_csv("/home/encryptedbee/tesla/projects/Indian-Education-2016/data/data.csv")
 g_dist_df = dist_df.groupby("STATNAME")
 
 state_names = list(g_dist_df.groups.keys())
@@ -22,13 +22,13 @@ variables = {
     "No. of Schools": ["SCHTOT", "schools"],
 }
 
-with open("data/india_states.geojson", "r") as fp:
+with open("/home/encryptedbee/tesla/projects/Indian-Education-2016/data/india_states.geojson", "r") as fp:
     state_wise_india = json.load(fp)
 
-with open("data/district_geodata.json", "r") as fp:
+with open("/home/encryptedbee/tesla/projects/Indian-Education-2016/data/district_geodata.json", "r") as fp:
     district_wise_india = json.loads(fp.read())
 
-loc = pd.read_csv("data/lat_lng.csv")
+loc = pd.read_csv("/home/encryptedbee/tesla/projects/Indian-Education-2016/data/lat_lng.csv")
 loc.set_index("statname", inplace=True)
 
 colors = {"background": "#111111", "text": "#7FDBFF", "bg_highlight": "#262626"}
